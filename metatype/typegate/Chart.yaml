@@ -1,0 +1,14 @@
+apiVersion: v2
+name: typegate
+description: A Helm chart for Typegate
+type: application
+version: 0.1.0
+appVersion: "0.0.1"
+dependencies:
+  - name: redis
+    condition: redis.enabled
+    version: "17.0.1"
+    repository: "https://charts.bitnami.com/bitnami"
+  - name: common
+    repository: https://charts.bitnami.com/bitnami
+    version: 1.x.x
