@@ -19,6 +19,12 @@ jobs:
           for dir in $(ls -d charts/*/); do
             helm dependency list $dir 2> /dev/null | tail +2 | head -n -1 | awk '{ print "helm repo add " $1 " " $3 }' | while read cmd; do $cmd; done
           done
+      - name: Lint charts
+        run: |
+          for dir in $(ls -d charts/*/); do
+            helm dependency build $dir
+            helm lint $dir --strict
+          done
       - run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

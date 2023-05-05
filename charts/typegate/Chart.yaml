@@ -2,8 +2,9 @@ apiVersion: v2
 name: typegate
 description: A Helm chart for Typegate
 type: application
-version: 0.1.1
+version: 0.1.2
 appVersion: "0.1.7"
+icon: https://metatype.dev/images/logo.svg
 dependencies:
   - name: redis
     condition: redis.enabled
