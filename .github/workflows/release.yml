@@ -20,21 +20,13 @@ jobs:
             helm dependency list $dir 2> /dev/null | tail +2 | head -n -1 | awk '{ print "helm repo add " $1 " " $3 }' | while read cmd; do $cmd; done
           done
       - run: |
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          mkdir -p public
-          mv README.md public/index.md
-      - uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: public
-          cname: charts.metatype.dev
-          enable_jekyll: true
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
       - uses: helm/chart-releaser-action@v1.5.0
         with:
           charts_dir: charts
         env:
-          CR_SKIP_EXISTING: true
           CR_OWNER: metatypedev
           CR_GIT_REPO: charts
+          CR_SKIP_EXISTING: true
           CR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
