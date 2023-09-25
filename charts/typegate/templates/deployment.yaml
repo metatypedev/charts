@@ -4,8 +4,9 @@ metadata:
   name: {{ include "typegate.fullname" . }}
   labels:
     {{- include "typegate.labels" . | nindent 4 }}
-  {{- with .Values.deploymentAnnotations }}
   annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+  {{- with .Values.deploymentAnnotations }}
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
@@ -48,6 +49,16 @@ spec:
                 secretKeyRef:
                   name: {{ template "redis.secretName" .Subcharts.redis }}
                   key: {{ template "redis.secretPasswordKey" .Subcharts.redis }}
+            - name: TG_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ default (include "typegate.fullname" .) .Values.auth.existingSecret }}
+                  key: {{ .Values.auth.secretKeys.secretKey }}
+            - name: TG_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ default (include "typegate.fullname" .) .Values.auth.existingSecret }}
+                  key: {{ .Values.auth.secretKeys.adminPasswordKey }}
             {{- with .Values.extraEnv }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
