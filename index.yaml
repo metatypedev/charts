@@ -3,6 +3,25 @@ entries:
   typegate:
   - apiVersion: v2
     appVersion: 0.1.7
+    created: "2023-09-25T16:16:21.955871466Z"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 18.x.x
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      version: 2.x.x
+    description: A Helm chart for Typegate
+    digest: e0654036425e00eac2e91ea0196146a24569d095227daee0c21d7c955630fb84
+    icon: https://metatype.dev/images/logo.svg
+    name: typegate
+    type: application
+    urls:
+    - https://github.com/metatypedev/charts/releases/download/typegate-0.2.0/typegate-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: 0.1.7
     created: "2023-05-05T21:27:35.794763136Z"
     dependencies:
     - condition: redis.enabled
@@ -56,4 +75,4 @@ entries:
     urls:
     - https://github.com/metatypedev/charts/releases/download/typegate-0.1.0/typegate-0.1.0.tgz
     version: 0.1.0
-generated: "2023-05-05T21:27:35.794775336Z"
+generated: "2023-09-25T16:16:21.955898866Z"
