@@ -4,7 +4,7 @@ image:
   registry: ghcr.io
   repository: metatypedev/typegate
   pullPolicy: IfNotPresent
-  tag: v0.1.14
+  tag: v0.4.1
 
 imagePullSecrets: []
 nameOverride: ""
@@ -19,8 +19,20 @@ auth:
   secret: ""
   existingSecret: ""
   secretKeys:
-    adminPasswordKey: "adminPassword"
-    secretKey: "secret"
+    adminPassword: "adminPassword"
+    secret: "secret"
+
+s3:
+  region: ""
+  bucket: ""
+  host: ""
+  pathStyle: "false"
+  accessKeyId: ""
+  secretAccessKey: ""
+  existingSecret: ""
+  secretKeys:
+    accessKeyId: "accessKeyId"
+    secretAccessKey: "secretAccessKey"
 
 podAnnotations: {}
 
