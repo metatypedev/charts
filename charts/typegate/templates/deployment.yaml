@@ -42,13 +42,13 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           env:
-            - name: SYNC_REDIS_URL
-              value: redis://{{ printf "%s-master" (include "common.names.fullname" .Subcharts.redis) }}:{{ .Subcharts.redis.Values.master.service.ports.redis }}/0
             - name: SYNC_REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ template "redis.secretName" .Subcharts.redis }}
                   key: {{ template "redis.secretPasswordKey" .Subcharts.redis }}
+            - name: SYNC_REDIS_URL
+              value: redis://:$(SYNC_REDIS_PASSWORD)@{{ printf "%s-master" (include "common.names.fullname" .Subcharts.redis) }}:{{ .Subcharts.redis.Values.master.service.ports.redis }}/0
             - name: TG_SECRET
               valueFrom:
                 secretKeyRef:
